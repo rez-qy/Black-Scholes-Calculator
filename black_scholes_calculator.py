@@ -120,10 +120,6 @@ def calculate_greeks(S, K, T, r, sigma):
     }
 
 
-# ─────────────────────────────────────────────
-# Input Validation
-# ─────────────────────────────────────────────
-
 def validate_inputs(S, K, T, r, sigma):
     """Validate all input parameters and raise informative errors."""
     if S <= 0:
@@ -137,10 +133,6 @@ def validate_inputs(S, K, T, r, sigma):
     if not (0 <= r <= 1):
         raise ValueError(f"Risk-free rate (r) should be between 0 and 1. Got: {r}")
 
-
-# ─────────────────────────────────────────────
-# Results Display
-# ─────────────────────────────────────────────
 
 def display_results(S, K, T, r, sigma):
     """
@@ -164,7 +156,7 @@ def display_results(S, K, T, r, sigma):
     print("     BLACK-SCHOLES OPTIONS PRICING CALCULATOR")
     print("=" * 55)
 
-    print("\n📥  INPUT PARAMETERS")
+    print("\n  INPUT PARAMETERS")
     print(f"    Stock Price (S)       : £{S:>10.2f}")
     print(f"    Strike Price (K)      : £{K:>10.2f}")
     print(f"    Time to Expiry (T)    : {T:>10.4f} years  ({T*365:.0f} days)")
@@ -172,7 +164,7 @@ def display_results(S, K, T, r, sigma):
     print(f"    Volatility (σ)        : {sigma*100:>9.2f}%")
     print(f"    Moneyness             :  {moneyness}")
 
-    print("\n💰  OPTION PRICES")
+    print("\n  OPTION PRICES")
     print(f"    Call Option Price     : £{call_price:>10.4f}")
     print(f"    Put Option Price      : £{put_price:>10.4f}")
 
@@ -180,7 +172,7 @@ def display_results(S, K, T, r, sigma):
     parity_check = call_price - put_price - S + K * math.exp(-r * T)
     print(f"\n    ✅ Put-Call Parity Check  : {parity_check:.6f}  (should be ~0)")
 
-    print("\n📐  OPTION GREEKS")
+    print("\n  OPTION GREEKS")
     print(f"  {'Greek':<12} {'Call':>12} {'Put':>12}   Description")
     print(f"  {'-'*12} {'-'*12} {'-'*12}   {'-'*30}")
 
@@ -213,14 +205,14 @@ def get_float_input(prompt, min_val=None, max_val=None):
         try:
             value = float(input(prompt))
             if min_val is not None and value <= min_val:
-                print(f"  ⚠️  Value must be greater than {min_val}. Try again.")
+                print(f"Value must be greater than {min_val}. Try again.")
                 continue
             if max_val is not None and value > max_val:
-                print(f"  ⚠️  Value must be ≤ {max_val}. Try again.")
+                print(f"Value must be ≤ {max_val}. Try again.")
                 continue
             return value
         except ValueError:
-            print("  ⚠️  Please enter a valid number.")
+            print("Please enter a valid number.")
 
 
 def run_interactive():
@@ -244,7 +236,7 @@ def run_interactive():
             display_results(S, K, T, r, sigma)
 
         except ValueError as e:
-            print(f"\n  ❌ Input Error: {e}")
+            print(f"\n Input Error: {e}")
         except KeyboardInterrupt:
             print("\n\n  Goodbye!\n")
             break
